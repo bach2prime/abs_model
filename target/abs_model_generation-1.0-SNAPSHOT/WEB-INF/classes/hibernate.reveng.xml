@@ -44,32 +44,32 @@ Contributor(s):
   <type-mapping>
     <sql-type jdbc-type="OTHER" hibernate-type="java.sql.Timestamp" />
   </type-mapping>
+  <table-filter match-name="USER_ACCOUNT_MAP"/>
+  <table-filter match-name="CUSTOMER_PRODUCT"/>
+  <table-filter match-name="TAX"/>
+  <table-filter match-name="TEMP_CUSTOMER_PRODUCT"/>
+  <table-filter match-name="AGENT_DETAIL"/>
+  <table-filter match-name="ROLE_PAGE"/>
   <table-filter match-name="ERROR_LOG"/>
-  <table-filter match-name="USER_INFO"/>
+  <table-filter match-name="TRANSACTION_DETAIL"/>
+  <table-filter match-name="ROLE"/>
+  <table-filter match-name="ACCOUNT"/>
   <table-filter match-name="PRODUCT"/>
-  <table-filter match-name="TRANSACTION"/>
+  <table-filter match-name="LEDGER_ACCOUNT"/>
+  <table-filter match-name="TRANSACTION_TYPE"/>
+  <table-filter match-name="CUSTOMER"/>
+  <table-filter match-name="BRANCH"/>
+  <table-filter match-name="OUTLET"/>
+  <table-filter match-name="SETTINGS"/>
+  <table-filter match-name="ORGANIZATION"/>
   <table-filter match-name="DISTRICT"/>
   <table-filter match-name="DIVISION"/>
-  <table-filter match-name="CUSTOMER"/>
-  <table-filter match-name="ORGANIZATION"/>
-  <table-filter match-name="TRANSACTION_DETAIL"/>
-  <table-filter match-name="TEMP_CUSTOMER_PRODUCT"/>
-  <table-filter match-name="PAGE"/>
-  <table-filter match-name="ROLE"/>
-  <table-filter match-name="USER_ACCOUNT_MAP"/>
-  <table-filter match-name="TRANSACTION_TYPE"/>
-  <table-filter match-name="TAX"/>
-  <table-filter match-name="CUSTOMER_PRODUCT"/>
-  <table-filter match-name="TEMP_CUSTOMER"/>
-  <table-filter match-name="AGENT_DETAIL"/>
-  <table-filter match-name="ACCOUNT"/>
   <table-filter match-name="ACCOUNT_BALANCE"/>
+  <table-filter match-name="UPAZILA"/>
+  <table-filter match-name="USER_INFO"/>
+  <table-filter match-name="TRANSACTION"/>
+  <table-filter match-name="TEMP_CUSTOMER"/>
   <table-filter match-name="COMMISSION"/>
   <table-filter match-name="ACCOUNT_CUSTOMER"/>
-  <table-filter match-name="SETTINGS"/>
-  <table-filter match-name="ROLE_PAGE"/>
-  <table-filter match-name="LEDGER_ACCOUNT"/>
-  <table-filter match-name="OUTLET"/>
-  <table-filter match-name="BRANCH"/>
-  <table-filter match-name="UPAZILA"/>
+  <table-filter match-name="PAGE"/>
 </hibernate-reverse-engineering>
