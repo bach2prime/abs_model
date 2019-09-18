@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2019 4:58:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.commlink.agent.model.LedgerAccount" table="LEDGER_ACCOUNT" schema="AGENT" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" precision="8" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="20" />
+        </property>
+        <property name="accNo" type="string">
+            <column name="ACC_NO" length="20" />
+        </property>
+        <property name="typeId" type="java.lang.Integer">
+            <column name="TYPE_ID" precision="8" scale="0" />
+        </property>
+        <property name="userId" type="java.lang.Integer">
+            <column name="USER_ID" precision="8" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

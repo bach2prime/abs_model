@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2019 4:58:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.commlink.agent.model.CustomerProduct" table="CUSTOMER_PRODUCT" schema="AGENT" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" precision="8" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="product" class="com.commlink.agent.model.Product" fetch="select">
+            <column name="PRODUCT_ID" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="customer" class="com.commlink.agent.model.Customer" fetch="select">
+            <column name="CUSTOMER_ID" precision="8" scale="0" />
+        </many-to-one>
+        <property name="type" type="java.lang.Short">
+            <column name="TYPE" precision="4" scale="0" />
+        </property>
+        <property name="dateTime" type="java.sql.Timestamp">
+            <column name="DATE_TIME" />
+        </property>
+        <property name="status" type="java.lang.Short">
+            <column name="STATUS" precision="4" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

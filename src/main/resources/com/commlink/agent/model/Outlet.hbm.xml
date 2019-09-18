@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2019 4:58:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.commlink.agent.model.Outlet" table="OUTLET" schema="AGENT" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" precision="8" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="branch" class="com.commlink.agent.model.Branch" fetch="select">
+            <column name="BRANCH_ID" precision="8" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="200" not-null="true" />
+        </property>
+        <property name="openedOn" type="java.sql.Timestamp">
+            <column name="OPENED_ON" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="200" not-null="true" />
+        </property>
+        <property name="city" type="string">
+            <column name="CITY" length="200" />
+        </property>
+        <property name="isDeleted" type="boolean">
+            <column name="IS_DELETED" precision="1" scale="0" not-null="true" />
+        </property>
+        <property name="createdBy" type="string">
+            <column name="CREATED_BY" length="200" />
+        </property>
+        <property name="creationDate" type="java.sql.Timestamp">
+            <column name="CREATION_DATE" />
+        </property>
+        <property name="modifiedBy" type="string">
+            <column name="MODIFIED_BY" length="20" />
+        </property>
+        <property name="modificationDate" type="java.sql.Timestamp">
+            <column name="MODIFICATION_DATE" />
+        </property>
+        <set name="userInfos" table="USER_INFO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="OUTLET_ID" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.UserInfo" />
+        </set>
+    </class>
+</hibernate-mapping>

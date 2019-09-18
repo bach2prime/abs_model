@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2019 4:58:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.commlink.agent.model.Division" table="DIVISION" schema="AGENT" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" precision="8" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nameEn" type="string">
+            <column name="NAME_EN" length="100" not-null="true" />
+        </property>
+        <property name="nameBn" type="string">
+            <column name="NAME_BN" length="100" not-null="true" />
+        </property>
+        <property name="code" type="string">
+            <column name="CODE" length="20" />
+        </property>
+        <set name="customersForPermanentDivisionId" table="CUSTOMER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PERMANENT_DIVISION_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.Customer" />
+        </set>
+        <set name="tempCustomersForPermanentDivisionId" table="TEMP_CUSTOMER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PERMANENT_DIVISION_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.TempCustomer" />
+        </set>
+        <set name="tempCustomersForPresentDivisionId" table="TEMP_CUSTOMER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PRESENT_DIVISION_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.TempCustomer" />
+        </set>
+        <set name="customersForPresentDivisionId" table="CUSTOMER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PRESENT_DIVISION_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.Customer" />
+        </set>
+        <set name="districts" table="DISTRICT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="DIVISION_ID" precision="8" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.District" />
+        </set>
+    </class>
+</hibernate-mapping>

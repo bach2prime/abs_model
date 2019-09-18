@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2019 4:58:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.commlink.agent.model.Transaction" table="TRANSACTION" schema="AGENT" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" precision="8" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="accountBySrcAccId" class="com.commlink.agent.model.Account" fetch="select">
+            <column name="SRC_ACC_ID" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="accountByAgentAccId" class="com.commlink.agent.model.Account" fetch="select">
+            <column name="AGENT_ACC_ID" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="accountByDestAccId" class="com.commlink.agent.model.Account" fetch="select">
+            <column name="DEST_ACC_ID" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="transactionType" class="com.commlink.agent.model.TransactionType" fetch="select">
+            <column name="TRANSACTION_TYPE" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="transaction" class="com.commlink.agent.model.Transaction" fetch="select">
+            <column name="REVERSED_TRASACTION_ID" precision="8" scale="0" />
+        </many-to-one>
+        <property name="isDeleted" type="boolean">
+            <column name="IS_DELETED" precision="1" scale="0" not-null="true" />
+        </property>
+        <property name="createdBy" type="string">
+            <column name="CREATED_BY" length="20" />
+        </property>
+        <property name="creationDate" type="java.sql.Timestamp">
+            <column name="CREATION_DATE" />
+        </property>
+        <property name="modificationDate" type="java.sql.Timestamp">
+            <column name="MODIFICATION_DATE" />
+        </property>
+        <property name="modifiedBy" type="string">
+            <column name="MODIFIED_BY" length="20" />
+        </property>
+        <property name="amount" type="big_decimal">
+            <column name="AMOUNT" precision="22" scale="0" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="512" />
+        </property>
+        <property name="isReversed" type="java.lang.Boolean">
+            <column name="IS_REVERSED" precision="1" scale="0" />
+        </property>
+        <property name="status" type="java.lang.Short">
+            <column name="STATUS" precision="4" scale="0" />
+        </property>
+        <property name="transactionDate" type="java.sql.Timestamp">
+            <column name="TRANSACTION_DATE" />
+        </property>
+        <set name="transactionDetails" table="TRANSACTION_DETAIL" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TRANSACTION_ID" precision="20" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.TransactionDetail" />
+        </set>
+        <set name="transactions" table="TRANSACTION" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="REVERSED_TRASACTION_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.Transaction" />
+        </set>
+    </class>
+</hibernate-mapping>
