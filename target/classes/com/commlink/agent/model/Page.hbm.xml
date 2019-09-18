@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2019 3:24:35 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.commlink.agent.model.Page" table="PAGE" schema="AGENT" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" precision="8" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="page" class="com.commlink.agent.model.Page" fetch="select">
+            <column name="PARENT_ID" precision="22" scale="0" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="100" />
+        </property>
+        <property name="url" type="string">
+            <column name="URL" length="100" />
+        </property>
+        <property name="type" type="java.lang.Integer">
+            <column name="TYPE" precision="8" scale="0">
+                <comment>0 for rootPage, 3 for display page, 4 for others</comment>
+            </column>
+        </property>
+        <property name="nameBangla" type="string">
+            <column name="NAME_BANGLA" length="200" />
+        </property>
+        <set name="rolePages" table="ROLE_PAGE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PAGE_ID" precision="8" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.RolePage" />
+        </set>
+        <set name="pages" table="PAGE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PARENT_ID" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.Page" />
+        </set>
+    </class>
+</hibernate-mapping>

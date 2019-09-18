@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2019 3:24:35 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.commlink.agent.model.TempCustomer" table="TEMP_CUSTOMER" schema="AGENT" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" precision="8" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="organization" class="com.commlink.agent.model.Organization" fetch="select">
+            <column name="ORG_ID" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="divisionByPermanentDivisionId" class="com.commlink.agent.model.Division" fetch="select">
+            <column name="PERMANENT_DIVISION_ID" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="divisionByPresentDivisionId" class="com.commlink.agent.model.Division" fetch="select">
+            <column name="PRESENT_DIVISION_ID" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="districtByPermanentDistrictId" class="com.commlink.agent.model.District" fetch="select">
+            <column name="PERMANENT_DISTRICT_ID" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="districtByPresentDistrictId" class="com.commlink.agent.model.District" fetch="select">
+            <column name="PRESENT_DISTRICT_ID" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="upazilaByPermanentUpazilaId" class="com.commlink.agent.model.Upazila" fetch="select">
+            <column name="PERMANENT_UPAZILA_ID" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="upazilaByPresentUpazilaId" class="com.commlink.agent.model.Upazila" fetch="select">
+            <column name="PRESENT_UPAZILA_ID" precision="8" scale="0" />
+        </many-to-one>
+        <property name="firstName" type="string">
+            <column name="FIRST_NAME" length="20" not-null="true" />
+        </property>
+        <property name="middleName" type="string">
+            <column name="MIDDLE_NAME" length="20" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="LAST_NAME" length="20" not-null="true" />
+        </property>
+        <property name="dob" type="date">
+            <column name="DOB" length="7" />
+        </property>
+        <property name="isDeleted" type="boolean">
+            <column name="IS_DELETED" precision="1" scale="0" not-null="true" />
+        </property>
+        <property name="createdBy" type="string">
+            <column name="CREATED_BY" length="20" />
+        </property>
+        <property name="creationDate" type="java.sql.Timestamp">
+            <column name="CREATION_DATE" />
+        </property>
+        <property name="modifiedBy" type="string">
+            <column name="MODIFIED_BY" length="20" />
+        </property>
+        <property name="modificationDate" type="java.sql.Timestamp">
+            <column name="MODIFICATION_DATE" />
+        </property>
+        <property name="homeBranch" type="string">
+            <column name="HOME_BRANCH" length="20" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="STATUS" precision="8" scale="0" />
+        </property>
+        <property name="fatherName" type="string">
+            <column name="FATHER_NAME" length="100" />
+        </property>
+        <property name="motherName" type="string">
+            <column name="MOTHER_NAME" length="100" />
+        </property>
+        <property name="spouseName" type="string">
+            <column name="SPOUSE_NAME" length="100" />
+        </property>
+        <property name="tin" type="string">
+            <column name="TIN" length="100" />
+        </property>
+        <property name="nid" type="string">
+            <column name="NID" length="100" />
+        </property>
+        <property name="employeeId" type="string">
+            <column name="EMPLOYEE_ID" length="100" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="100" />
+        </property>
+        <property name="phone" type="string">
+            <column name="PHONE" length="100" />
+        </property>
+        <property name="sourceOfFund" type="string">
+            <column name="SOURCE_OF_FUND" length="100" />
+        </property>
+        <property name="presentPostCode" type="string">
+            <column name="PRESENT_POST_CODE" length="100" />
+        </property>
+        <property name="permanentPostCode" type="string">
+            <column name="PERMANENT_POST_CODE" length="100" />
+        </property>
+        <property name="presentVillage" type="string">
+            <column name="PRESENT_VILLAGE" length="100" />
+        </property>
+        <property name="nationality" type="string">
+            <column name="NATIONALITY" length="100" />
+        </property>
+        <property name="occupation" type="string">
+            <column name="OCCUPATION" length="100" />
+        </property>
+        <property name="designation" type="string">
+            <column name="DESIGNATION" length="100" />
+        </property>
+        <property name="monthlyIncome" type="string">
+            <column name="MONTHLY_INCOME" length="100" />
+        </property>
+        <property name="photoUrl" type="string">
+            <column name="PHOTO_URL" length="100" />
+        </property>
+        <property name="signatureUrl" type="string">
+            <column name="SIGNATURE_URL" length="100" />
+        </property>
+        <property name="currency" type="java.lang.Integer">
+            <column name="CURRENCY" precision="8" scale="0" />
+        </property>
+        <property name="gender" type="java.lang.Integer">
+            <column name="GENDER" precision="8" scale="0" />
+        </property>
+        <property name="maritalStatus" type="java.lang.Integer">
+            <column name="MARITAL_STATUS" precision="8" scale="0" />
+        </property>
+        <property name="residenceStatus" type="java.lang.Integer">
+            <column name="RESIDENCE_STATUS" precision="8" scale="0" />
+        </property>
+        <set name="tempCustomerProducts" table="TEMP_CUSTOMER_PRODUCT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="CUSTOMER_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.TempCustomerProduct" />
+        </set>
+    </class>
+</hibernate-mapping>

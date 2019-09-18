@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2019 3:24:35 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.commlink.agent.model.ErrorLog" table="ERROR_LOG" schema="AGENT" optimistic-lock="version">
+        <id name="id" type="big_decimal">
+            <column name="ID" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="title" type="string">
+            <column name="TITLE" length="200" />
+        </property>
+        <property name="info" type="clob">
+            <column name="INFO" />
+        </property>
+        <property name="createdOn" type="date">
+            <column name="CREATED_ON" length="7" />
+        </property>
+        <property name="createdBy" type="string">
+            <column name="CREATED_BY" length="100" />
+        </property>
+        <property name="callstack" type="clob">
+            <column name="CALLSTACK" />
+        </property>
+        <property name="errorstack" type="clob">
+            <column name="ERRORSTACK" />
+        </property>
+        <property name="errorbacktrace" type="clob">
+            <column name="ERRORBACKTRACE" />
+        </property>
+    </class>
+</hibernate-mapping>

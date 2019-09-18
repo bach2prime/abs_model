@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2019 3:24:35 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.commlink.agent.model.Product" table="PRODUCT" schema="AGENT" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" precision="8" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="20" not-null="true" />
+        </property>
+        <property name="minLimit" type="string">
+            <column name="MIN_LIMIT" length="20" />
+        </property>
+        <property name="isRecurring" type="java.lang.Boolean">
+            <column name="IS_RECURRING" precision="1" scale="0" />
+        </property>
+        <property name="launchAt" type="java.sql.Timestamp">
+            <column name="LAUNCH_AT" />
+        </property>
+        <property name="type" type="java.lang.Integer">
+            <column name="TYPE" precision="8" scale="0" />
+        </property>
+        <property name="isDeleted" type="java.lang.Boolean">
+            <column name="IS_DELETED" precision="1" scale="0" />
+        </property>
+        <property name="createdBy" type="string">
+            <column name="CREATED_BY" length="20" />
+        </property>
+        <property name="creationDate" type="java.sql.Timestamp">
+            <column name="CREATION_DATE" />
+        </property>
+        <property name="modifiedBy" type="string">
+            <column name="MODIFIED_BY" length="20" />
+        </property>
+        <property name="modificationDate" type="java.sql.Timestamp">
+            <column name="MODIFICATION_DATE" />
+        </property>
+        <property name="code" type="string">
+            <column name="CODE" length="3" not-null="true" unique="true" />
+        </property>
+        <property name="capPeriodDr" type="java.lang.Short">
+            <column name="CAP_PERIOD_DR" precision="4" scale="0" />
+        </property>
+        <property name="capPeriodCr" type="java.lang.Short">
+            <column name="CAP_PERIOD_CR" precision="4" scale="0" />
+        </property>
+        <property name="status" type="java.lang.Short">
+            <column name="STATUS" precision="4" scale="0" />
+        </property>
+        <property name="maxLimit" type="string">
+            <column name="MAX_LIMIT" length="20" />
+        </property>
+        <set name="tempCustomerProducts" table="TEMP_CUSTOMER_PRODUCT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PRODUCT_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.TempCustomerProduct" />
+        </set>
+        <set name="accounts" table="ACCOUNT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PRODUCT_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.Account" />
+        </set>
+        <set name="customerProducts" table="CUSTOMER_PRODUCT" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PRODUCT_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.CustomerProduct" />
+        </set>
+    </class>
+</hibernate-mapping>

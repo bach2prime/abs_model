@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2019 3:24:35 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.commlink.agent.model.Upazila" table="UPAZILA" schema="AGENT" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" precision="8" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="district" class="com.commlink.agent.model.District" fetch="select">
+            <column name="DISTRICT_ID" precision="8" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="nameEn" type="string">
+            <column name="NAME_EN" length="100" not-null="true" />
+        </property>
+        <property name="nameBn" type="string">
+            <column name="NAME_BN" length="100" not-null="true" />
+        </property>
+        <property name="code" type="string">
+            <column name="CODE" length="20" />
+        </property>
+        <set name="customersForPresentUpazilaId" table="CUSTOMER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PRESENT_UPAZILA_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.Customer" />
+        </set>
+        <set name="customersForPermanentUpazilaId" table="CUSTOMER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PERMANENT_UPAZILA_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.Customer" />
+        </set>
+        <set name="tempCustomersForPermanentUpazilaId" table="TEMP_CUSTOMER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PERMANENT_UPAZILA_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.TempCustomer" />
+        </set>
+        <set name="tempCustomersForPresentUpazilaId" table="TEMP_CUSTOMER" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PRESENT_UPAZILA_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.TempCustomer" />
+        </set>
+    </class>
+</hibernate-mapping>
