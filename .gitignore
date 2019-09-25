@@ -28,3 +28,4 @@ lib/*
 agent/target/
 agent/lib/*
 /agent_hb/target/
+*.class

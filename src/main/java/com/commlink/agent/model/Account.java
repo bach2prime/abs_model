@@ -1,5 +1,5 @@
 package com.commlink.agent.model;
-// Generated Sep 18, 2019 4:58:14 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2019 11:25:45 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -28,7 +28,7 @@ public class Account  implements java.io.Serializable {
 
      private int id;
      private Product product;
-     private boolean isDeleted;
+     private Boolean isDeleted;
      private String createdBy;
      private Date creationDate;
      private String modifiedBy;
@@ -56,13 +56,12 @@ public class Account  implements java.io.Serializable {
     }
 
 	
-    public Account(int id, boolean isDeleted, String accNo, String productCode) {
+    public Account(int id, String accNo, String productCode) {
         this.id = id;
-        this.isDeleted = isDeleted;
         this.accNo = accNo;
         this.productCode = productCode;
     }
-    public Account(int id, Product product, boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, String accNo, String productCode, String description, Short status, Date openOn, Date closeOn, Date freezeOn, Integer associatedAgentAcc, Integer makerId, Integer checkerId, Integer operatorType, String name, Integer accountType, Set<Transaction> transactionsForSrcAccId, Set<AccountCustomer> accountCustomers, Set<Transaction> transactionsForAgentAccId, Set<Transaction> transactionsForDestAccId, Set<TransactionDetail> transactionDetails) {
+    public Account(int id, Product product, Boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, String accNo, String productCode, String description, Short status, Date openOn, Date closeOn, Date freezeOn, Integer associatedAgentAcc, Integer makerId, Integer checkerId, Integer operatorType, String name, Integer accountType, Set<Transaction> transactionsForSrcAccId, Set<AccountCustomer> accountCustomers, Set<Transaction> transactionsForAgentAccId, Set<Transaction> transactionsForDestAccId, Set<TransactionDetail> transactionDetails) {
        this.id = id;
        this.product = product;
        this.isDeleted = isDeleted;
@@ -113,12 +112,12 @@ public class Account  implements java.io.Serializable {
     }
 
     
-    @Column(name="IS_DELETED", nullable=false, precision=1, scale=0)
-    public boolean isIsDeleted() {
+    @Column(name="IS_DELETED", precision=1, scale=0)
+    public Boolean getIsDeleted() {
         return this.isDeleted;
     }
     
-    public void setIsDeleted(boolean isDeleted) {
+    public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 

@@ -72,7 +72,7 @@ Contributor(s):
     <mapping resource="com/commlink/agent/model/CustomerProduct.hbm.xml"/>
     <mapping resource="com/commlink/agent/model/Commission.hbm.xml"/>
     <mapping resource="com/commlink/agent/model/Product.hbm.xml"/>
-    <mapping resource="com/commlink/agent/model/Customer.hbm.xml"/>
     <mapping resource="com/commlink/agent/model/TransactionDetail.hbm.xml"/>
+    <mapping resource="com/commlink/agent/model/Customer.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

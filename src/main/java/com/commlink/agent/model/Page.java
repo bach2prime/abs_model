@@ -1,5 +1,5 @@
 package com.commlink.agent.model;
-// Generated Sep 18, 2019 4:58:14 PM by Hibernate Tools 4.3.1
+// Generated Sep 25, 2019 11:25:45 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
