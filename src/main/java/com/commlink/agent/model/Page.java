@@ -29,6 +29,7 @@ public class Page  implements java.io.Serializable {
      private String url;
      private Integer type;
      private String nameBangla;
+     private Integer position;
      private Set<RolePage> rolePages = new HashSet<RolePage>(0);
      private Set<Page> pages = new HashSet<Page>(0);
 
@@ -39,18 +40,19 @@ public class Page  implements java.io.Serializable {
     public Page(int id) {
         this.id = id;
     }
-    public Page(int id, Page page, String name, String url, Integer type, String nameBangla, Set<RolePage> rolePages, Set<Page> pages) {
+    public Page(int id, Page page, String name, String url, Integer type, String nameBangla, Integer position, Set<RolePage> rolePages, Set<Page> pages) {
        this.id = id;
        this.page = page;
        this.name = name;
        this.url = url;
        this.type = type;
        this.nameBangla = nameBangla;
+       this.position = position;
        this.rolePages = rolePages;
        this.pages = pages;
     }
    
-     @Id 
+    @Id 
 
     
     @Column(name="ID", unique=true, nullable=false, precision=8, scale=0)
@@ -110,6 +112,16 @@ public class Page  implements java.io.Serializable {
     
     public void setNameBangla(String nameBangla) {
         this.nameBangla = nameBangla;
+    }
+
+    
+    @Column(name="POSITION", precision=8, scale=0)
+    public Integer getPosition() {
+        return this.position;
+    }
+    
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="page")

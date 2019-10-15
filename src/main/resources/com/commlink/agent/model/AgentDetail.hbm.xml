@@ -11,6 +11,9 @@
         <many-to-one name="customer" class="com.commlink.agent.model.Customer" fetch="select">
             <column name="CUSTOMER_ID" precision="8" scale="0" not-null="true" />
         </many-to-one>
+        <many-to-one name="agentCommissionProfile" class="com.commlink.agent.model.AgentCommissionProfile" fetch="select">
+            <column name="AGENT_COMMISSION_PROFILE_ID" precision="8" scale="0" />
+        </many-to-one>
         <property name="agentCode" type="string">
             <column name="AGENT_CODE" length="4" not-null="true" />
         </property>
@@ -32,11 +35,5 @@
         <property name="modificationDate" type="java.sql.Timestamp">
             <column name="MODIFICATION_DATE" />
         </property>
-        <set name="commissions" table="COMMISSION" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="AGENT_ID" precision="8" scale="0" not-null="true" />
-            </key>
-            <one-to-many class="com.commlink.agent.model.Commission" />
-        </set>
     </class>
 </hibernate-mapping>

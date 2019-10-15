@@ -128,6 +128,12 @@
         <property name="residenceStatus" type="java.lang.Integer">
             <column name="RESIDENCE_STATUS" precision="8" scale="0" />
         </property>
+        <property name="customerType" type="java.lang.Integer">
+            <column name="CUSTOMER_TYPE" precision="8" scale="0" />
+        </property>
+        <property name="permanentVillage" type="string">
+            <column name="PERMANENT_VILLAGE" length="100" />
+        </property>
         <set name="userInfos" table="USER_INFO" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="CUSTOMER_ID" precision="22" scale="0" />

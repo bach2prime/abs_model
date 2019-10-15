@@ -67,6 +67,8 @@ public class Customer  implements java.io.Serializable {
      private Integer gender;
      private Integer maritalStatus;
      private Integer residenceStatus;
+     private Integer customerType;
+     private String permanentVillage;
      private Set<UserInfo> userInfos = new HashSet<UserInfo>(0);
      private Set<AgentDetail> agentDetails = new HashSet<AgentDetail>(0);
      private Set<CustomerProduct> customerProducts = new HashSet<CustomerProduct>(0);
@@ -82,7 +84,7 @@ public class Customer  implements java.io.Serializable {
         this.lastName = lastName;
         this.isDeleted = isDeleted;
     }
-    public Customer(int id, Organization organization, Division divisionByPermanentDivisionId, Division divisionByPresentDivisionId, District districtByPresentDistrictId, District districtByPermanentDistrictId, Upazila upazilaByPresentUpazilaId, Upazila upazilaByPermanentUpazilaId, String firstName, String middleName, String lastName, Date dob, boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, String homeBranch, Integer status, String fatherName, String motherName, String spouseName, String tin, String nid, String employeeId, String email, String phone, String sourceOfFund, String presentPostCode, String permanentPostCode, String presentVillage, String nationality, String occupation, String designation, String monthlyIncome, String photoUrl, String signatureUrl, Integer currency, Integer gender, Integer maritalStatus, Integer residenceStatus, Set<UserInfo> userInfos, Set<AgentDetail> agentDetails, Set<CustomerProduct> customerProducts, Set<AccountCustomer> accountCustomers) {
+    public Customer(int id, Organization organization, Division divisionByPermanentDivisionId, Division divisionByPresentDivisionId, District districtByPresentDistrictId, District districtByPermanentDistrictId, Upazila upazilaByPresentUpazilaId, Upazila upazilaByPermanentUpazilaId, String firstName, String middleName, String lastName, Date dob, boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, String homeBranch, Integer status, String fatherName, String motherName, String spouseName, String tin, String nid, String employeeId, String email, String phone, String sourceOfFund, String presentPostCode, String permanentPostCode, String presentVillage, String nationality, String occupation, String designation, String monthlyIncome, String photoUrl, String signatureUrl, Integer currency, Integer gender, Integer maritalStatus, Integer residenceStatus, Integer customerType, String permanentVillage, Set<UserInfo> userInfos, Set<AgentDetail> agentDetails, Set<CustomerProduct> customerProducts, Set<AccountCustomer> accountCustomers) {
        this.id = id;
        this.organization = organization;
        this.divisionByPermanentDivisionId = divisionByPermanentDivisionId;
@@ -124,13 +126,15 @@ public class Customer  implements java.io.Serializable {
        this.gender = gender;
        this.maritalStatus = maritalStatus;
        this.residenceStatus = residenceStatus;
+       this.customerType = customerType;
+       this.permanentVillage = permanentVillage;
        this.userInfos = userInfos;
        this.agentDetails = agentDetails;
        this.customerProducts = customerProducts;
        this.accountCustomers = accountCustomers;
     }
    
-     @Id 
+    @Id 
 
     
     @Column(name="ID", unique=true, nullable=false, precision=8, scale=0)
@@ -540,6 +544,26 @@ public class Customer  implements java.io.Serializable {
     
     public void setResidenceStatus(Integer residenceStatus) {
         this.residenceStatus = residenceStatus;
+    }
+
+    
+    @Column(name="CUSTOMER_TYPE", precision=8, scale=0)
+    public Integer getCustomerType() {
+        return this.customerType;
+    }
+    
+    public void setCustomerType(Integer customerType) {
+        this.customerType = customerType;
+    }
+
+    
+    @Column(name="PERMANENT_VILLAGE", length=100)
+    public String getPermanentVillage() {
+        return this.permanentVillage;
+    }
+    
+    public void setPermanentVillage(String permanentVillage) {
+        this.permanentVillage = permanentVillage;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="customer")

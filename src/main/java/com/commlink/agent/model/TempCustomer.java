@@ -2,16 +2,20 @@ package com.commlink.agent.model;
 // Generated Sep 25, 2019 11:25:45 AM by Hibernate Tools 4.3.1
 
 
+import java.sql.Blob;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -67,6 +71,9 @@ public class TempCustomer  implements java.io.Serializable {
      private Integer gender;
      private Integer maritalStatus;
      private Integer residenceStatus;
+     private Integer customerType;
+     private String permanentVillage;
+     private Blob fp;
      private Set<TempCustomerProduct> tempCustomerProducts = new HashSet<TempCustomerProduct>(0);
 
     public TempCustomer() {
@@ -79,7 +86,7 @@ public class TempCustomer  implements java.io.Serializable {
         this.lastName = lastName;
         this.isDeleted = isDeleted;
     }
-    public TempCustomer(int id, Organization organization, Division divisionByPermanentDivisionId, Division divisionByPresentDivisionId, District districtByPermanentDistrictId, District districtByPresentDistrictId, Upazila upazilaByPermanentUpazilaId, Upazila upazilaByPresentUpazilaId, String firstName, String middleName, String lastName, Date dob, boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, String homeBranch, Integer status, String fatherName, String motherName, String spouseName, String tin, String nid, String employeeId, String email, String phone, String sourceOfFund, String presentPostCode, String permanentPostCode, String presentVillage, String nationality, String occupation, String designation, String monthlyIncome, String photoUrl, String signatureUrl, Integer currency, Integer gender, Integer maritalStatus, Integer residenceStatus, Set<TempCustomerProduct> tempCustomerProducts) {
+    public TempCustomer(int id, Organization organization, Division divisionByPermanentDivisionId, Division divisionByPresentDivisionId, District districtByPermanentDistrictId, District districtByPresentDistrictId, Upazila upazilaByPermanentUpazilaId, Upazila upazilaByPresentUpazilaId, String firstName, String middleName, String lastName, Date dob, boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, String homeBranch, Integer status, String fatherName, String motherName, String spouseName, String tin, String nid, String employeeId, String email, String phone, String sourceOfFund, String presentPostCode, String permanentPostCode, String presentVillage, String nationality, String occupation, String designation, String monthlyIncome, String photoUrl, String signatureUrl, Integer currency, Integer gender, Integer maritalStatus, Integer residenceStatus, Integer customerType, String permanentVillage, Blob fp, Set<TempCustomerProduct> tempCustomerProducts) {
        this.id = id;
        this.organization = organization;
        this.divisionByPermanentDivisionId = divisionByPermanentDivisionId;
@@ -121,11 +128,15 @@ public class TempCustomer  implements java.io.Serializable {
        this.gender = gender;
        this.maritalStatus = maritalStatus;
        this.residenceStatus = residenceStatus;
+       this.customerType = customerType;
+       this.permanentVillage = permanentVillage;
+       this.fp = fp;
        this.tempCustomerProducts = tempCustomerProducts;
     }
    
-     @Id 
-
+    @Id 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TEMP_CUSTOMER_SEQ")
+    @SequenceGenerator(name = "TEMP_CUSTOMER_SEQ", sequenceName = "TEMP_CUSTOMER_SEQ")
     
     @Column(name="ID", unique=true, nullable=false, precision=8, scale=0)
     public int getId() {
@@ -536,7 +547,38 @@ public class TempCustomer  implements java.io.Serializable {
         this.residenceStatus = residenceStatus;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="tempCustomer")
+    
+    @Column(name="CUSTOMER_TYPE", precision=8, scale=0)
+    public Integer getCustomerType() {
+        return this.customerType;
+    }
+    
+    public void setCustomerType(Integer customerType) {
+        this.customerType = customerType;
+    }
+
+    
+    @Column(name="PERMANENT_VILLAGE", length=100)
+    public String getPermanentVillage() {
+        return this.permanentVillage;
+    }
+    
+    public void setPermanentVillage(String permanentVillage) {
+        this.permanentVillage = permanentVillage;
+    }
+    
+    @Column(name = "FP")
+    public Blob getFp()
+    {
+        return this.fp;
+    }
+
+    public void setFp(Blob fp)
+    {
+        this.fp = fp;
+    }
+
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="tempCustomer")
     public Set<TempCustomerProduct> getTempCustomerProducts() {
         return this.tempCustomerProducts;
     }

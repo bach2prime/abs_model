@@ -59,6 +59,14 @@
             </key>
             <one-to-many class="com.commlink.agent.model.TempCustomerProduct" />
         </set>
+        <set name="commissions" table="COMMISSION" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PRODUCT_ID" precision="8" scale="0">
+                    <comment>product type of commission</comment>
+                </column>
+            </key>
+            <one-to-many class="com.commlink.agent.model.Commission" />
+        </set>
         <set name="accounts" table="ACCOUNT" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="PRODUCT_ID" precision="8" scale="0" />

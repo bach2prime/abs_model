@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 25, 2019 11:25:46 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.commlink.agent.model.Range" table="RANGE" schema="AGENT" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="ID" precision="8" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="upperLimit" type="java.lang.Long">
+            <column name="UPPER_LIMIT" precision="10" scale="0" />
+        </property>
+        <property name="createdBy" type="string">
+            <column name="CREATED_BY" length="20" />
+        </property>
+        <property name="creationDate" type="java.sql.Timestamp">
+            <column name="CREATION_DATE" />
+        </property>
+        <property name="modifiedBy" type="string">
+            <column name="MODIFIED_BY" length="20" />
+        </property>
+        <property name="modifiedDate" type="java.sql.Timestamp">
+            <column name="MODIFIED_DATE" />
+        </property>
+        <set name="commissions" table="COMMISSION" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="RANGE_ID" precision="8" scale="0" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.Commission" />
+        </set>
+    </class>
+</hibernate-mapping>

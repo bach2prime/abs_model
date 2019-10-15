@@ -3,25 +3,21 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Sep 25, 2019 11:25:46 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.commlink.agent.model.AgentDetail" table="AGENT_DETAIL" schema="AGENT" optimistic-lock="version">
+    <class name="com.commlink.agent.model.AccountType" table="ACCOUNT_TYPE" schema="AGENT" optimistic-lock="version">
         <id name="id" type="int">
             <column name="ID" precision="8" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="customer" class="com.commlink.agent.model.Customer" fetch="select">
-            <column name="CUSTOMER_ID" precision="8" scale="0" not-null="true" />
-        </many-to-one>
-        <many-to-one name="agentCommissionProfile" class="com.commlink.agent.model.AgentCommissionProfile" fetch="select">
-            <column name="AGENT_COMMISSION_PROFILE_ID" precision="8" scale="0" />
-        </many-to-one>
-        <property name="agentCode" type="string">
-            <column name="AGENT_CODE" length="4" not-null="true" />
+        <property name="name" type="string">
+            <column name="NAME" length="20" />
         </property>
-        <property name="status" type="java.lang.Short">
-            <column name="STATUS" precision="4" scale="0" />
+        <property name="type" type="big_decimal">
+            <column name="TYPE" precision="22" scale="0">
+                <comment>asset, liability etc</comment>
+            </column>
         </property>
-        <property name="isDeleted" type="java.lang.Boolean">
-            <column name="IS_DELETED" precision="1" scale="0" />
+        <property name="isDeleted" type="boolean">
+            <column name="IS_DELETED" precision="1" scale="0" not-null="true" />
         </property>
         <property name="createdBy" type="string">
             <column name="CREATED_BY" length="20" />
@@ -34,6 +30,9 @@
         </property>
         <property name="modificationDate" type="java.sql.Timestamp">
             <column name="MODIFICATION_DATE" />
+        </property>
+        <property name="code" type="string">
+            <column name="CODE" length="20" />
         </property>
     </class>
 </hibernate-mapping>

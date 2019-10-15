@@ -37,7 +37,7 @@
         </property>
         <set name="commissions" table="COMMISSION" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="TRANSACTION_TYPE" precision="8" scale="0" not-null="true">
+                <column name="TRANSACTION_TYPE_ID" precision="8" scale="0" not-null="true">
                     <comment>withdraw, fund transfer etc</comment>
                 </column>
             </key>

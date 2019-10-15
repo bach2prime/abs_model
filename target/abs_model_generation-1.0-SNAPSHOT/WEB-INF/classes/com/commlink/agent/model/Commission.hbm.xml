@@ -8,29 +8,28 @@
             <column name="ID" precision="8" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="agentDetail" class="com.commlink.agent.model.AgentDetail" fetch="select">
-            <column name="AGENT_ID" precision="8" scale="0" not-null="true" />
+        <many-to-one name="product" class="com.commlink.agent.model.Product" fetch="select">
+            <column name="PRODUCT_ID" precision="8" scale="0">
+                <comment>product type of commission</comment>
+            </column>
         </many-to-one>
         <many-to-one name="transactionType" class="com.commlink.agent.model.TransactionType" fetch="select">
-            <column name="TRANSACTION_TYPE" precision="8" scale="0" not-null="true">
+            <column name="TRANSACTION_TYPE_ID" precision="8" scale="0" not-null="true">
                 <comment>withdraw, fund transfer etc</comment>
             </column>
+        </many-to-one>
+        <many-to-one name="range" class="com.commlink.agent.model.Range" fetch="select">
+            <column name="RANGE_ID" precision="8" scale="0" />
         </many-to-one>
         <property name="isAmountWise" type="java.lang.Boolean">
             <column name="IS_AMOUNT_WISE" precision="1" scale="0">
                 <comment>amount wise or count wise</comment>
             </column>
         </property>
-        <property name="criteria" type="big_decimal">
-            <column name="CRITERIA" precision="22" scale="0">
+        <property name="criteria" type="java.lang.Integer">
+            <column name="CRITERIA" precision="8" scale="0">
                 <comment>on daily balance or avg balance etc</comment>
             </column>
-        </property>
-        <property name="rangeLowerLimit" type="big_decimal">
-            <column name="RANGE_LOWER_LIMIT" precision="10" />
-        </property>
-        <property name="rangeUpperLimit" type="big_decimal">
-            <column name="RANGE_UPPER_LIMIT" precision="10" />
         </property>
         <property name="isDeleted" type="boolean">
             <column name="IS_DELETED" precision="1" scale="0" not-null="true" />
@@ -52,20 +51,25 @@
                 <comment>percentage or actual amount</comment>
             </column>
         </property>
-        <property name="bankAccount" type="string">
-            <column name="BANK_ACCOUNT" length="20" not-null="true" />
-        </property>
         <property name="agentPortion" type="java.lang.Double">
             <column name="AGENT_PORTION" precision="8" scale="0" />
         </property>
-        <property name="bankPortion" type="double">
-            <column name="BANK_PORTION" precision="8" scale="0" not-null="true" />
+        <property name="bankPortion" type="java.lang.Double">
+            <column name="BANK_PORTION" precision="8" scale="0" />
         </property>
-        <property name="otherPortion" type="java.lang.Double">
-            <column name="OTHER_PORTION" precision="8" scale="0" />
+        <property name="startDate" type="java.sql.Timestamp">
+            <column name="START_DATE">
+                <comment>effective date</comment>
+            </column>
         </property>
-        <property name="otherAccount" type="string">
-            <column name="OTHER_ACCOUNT" length="20" />
+        <property name="endDate" type="java.sql.Timestamp">
+            <column name="END_DATE" />
         </property>
+        <set name="commissionProfiles" table="COMMISSION_PROFILE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="COMMISSION_ID" precision="8" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.commlink.agent.model.CommissionProfile" />
+        </set>
     </class>
 </hibernate-mapping>

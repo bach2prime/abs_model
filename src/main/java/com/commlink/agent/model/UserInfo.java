@@ -44,6 +44,7 @@ public class UserInfo  implements java.io.Serializable {
      private int authType;
      private Short type;
      private Integer status;
+     private Integer isFpRequired;
      private Set<UserInfo> userInfos = new HashSet<UserInfo>(0);
 
     public UserInfo() {
@@ -57,7 +58,7 @@ public class UserInfo  implements java.io.Serializable {
         this.isDeleted = isDeleted;
         this.authType = authType;
     }
-    public UserInfo(int id, UserInfo userInfo, Role role, Customer customer, Outlet outlet, String userName, String passwordHash, String pin, boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, Blob fingerprint, int authType, Short type, Integer status, Set<UserInfo> userInfos) {
+    public UserInfo(int id, UserInfo userInfo, Role role, Customer customer, Outlet outlet, String userName, String passwordHash, String pin, boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, Blob fingerprint, int authType, Short type, Integer status, Integer isFpRequired, Set<UserInfo> userInfos) {
        this.id = id;
        this.userInfo = userInfo;
        this.role = role;
@@ -75,10 +76,11 @@ public class UserInfo  implements java.io.Serializable {
        this.authType = authType;
        this.type = type;
        this.status = status;
+       this.isFpRequired = isFpRequired;
        this.userInfos = userInfos;
     }
    
-     @Id 
+    @Id 
 
     
     @Column(name="ID", unique=true, nullable=false, precision=8, scale=0)
@@ -248,6 +250,16 @@ public class UserInfo  implements java.io.Serializable {
     
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    
+    @Column(name="IS_FP_REQUIRED", precision=8, scale=0)
+    public Integer getIsFpRequired() {
+        return this.isFpRequired;
+    }
+    
+    public void setIsFpRequired(Integer isFpRequired) {
+        this.isFpRequired = isFpRequired;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="userInfo")

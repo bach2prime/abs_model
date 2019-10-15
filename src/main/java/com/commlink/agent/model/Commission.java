@@ -2,14 +2,16 @@ package com.commlink.agent.model;
 // Generated Sep 25, 2019 11:25:45 AM by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,58 +27,53 @@ public class Commission  implements java.io.Serializable {
 
 
      private int id;
-     private AgentDetail agentDetail;
+     private Product product;
      private TransactionType transactionType;
+     private Range range;
      private Boolean isAmountWise;
-     private BigDecimal criteria;
-     private BigDecimal rangeLowerLimit;
-     private BigDecimal rangeUpperLimit;
+     private Integer criteria;
      private boolean isDeleted;
      private String createdBy;
      private Date creationDate;
      private String modifiedBy;
      private Date modificationDate;
      private Boolean isPercentage;
-     private String bankAccount;
      private Double agentPortion;
-     private double bankPortion;
-     private Double otherPortion;
-     private String otherAccount;
+     private Double bankPortion;
+     private Date startDate;
+     private Date endDate;
+     private Set<CommissionProfile> commissionProfiles = new HashSet<CommissionProfile>(0);
 
     public Commission() {
     }
 
 	
-    public Commission(int id, AgentDetail agentDetail, TransactionType transactionType, boolean isDeleted, String bankAccount, double bankPortion) {
+    public Commission(int id, TransactionType transactionType, boolean isDeleted) {
         this.id = id;
-        this.agentDetail = agentDetail;
         this.transactionType = transactionType;
         this.isDeleted = isDeleted;
-        this.bankAccount = bankAccount;
-        this.bankPortion = bankPortion;
     }
-    public Commission(int id, AgentDetail agentDetail, TransactionType transactionType, Boolean isAmountWise, BigDecimal criteria, BigDecimal rangeLowerLimit, BigDecimal rangeUpperLimit, boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, Boolean isPercentage, String bankAccount, Double agentPortion, double bankPortion, Double otherPortion, String otherAccount) {
+    public Commission(int id, Product product, TransactionType transactionType, Range range, Boolean isAmountWise, Integer criteria, boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, Boolean isPercentage, Double agentPortion, Double bankPortion, Date startDate, Date endDate, Set<CommissionProfile> commissionProfiles) {
        this.id = id;
-       this.agentDetail = agentDetail;
+       this.product = product;
        this.transactionType = transactionType;
+       this.range = range;
        this.isAmountWise = isAmountWise;
        this.criteria = criteria;
-       this.rangeLowerLimit = rangeLowerLimit;
-       this.rangeUpperLimit = rangeUpperLimit;
        this.isDeleted = isDeleted;
        this.createdBy = createdBy;
        this.creationDate = creationDate;
        this.modifiedBy = modifiedBy;
        this.modificationDate = modificationDate;
        this.isPercentage = isPercentage;
-       this.bankAccount = bankAccount;
        this.agentPortion = agentPortion;
        this.bankPortion = bankPortion;
-       this.otherPortion = otherPortion;
-       this.otherAccount = otherAccount;
+       this.startDate = startDate;
+       this.endDate = endDate;
+       this.commissionProfiles = commissionProfiles;
     }
    
-     @Id 
+    @Id 
 
     
     @Column(name="ID", unique=true, nullable=false, precision=8, scale=0)
@@ -89,23 +86,33 @@ public class Commission  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="AGENT_ID", nullable=false)
-    public AgentDetail getAgentDetail() {
-        return this.agentDetail;
+    @JoinColumn(name="PRODUCT_ID")
+    public Product getProduct() {
+        return this.product;
     }
     
-    public void setAgentDetail(AgentDetail agentDetail) {
-        this.agentDetail = agentDetail;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="TRANSACTION_TYPE", nullable=false)
+    @JoinColumn(name="TRANSACTION_TYPE_ID", nullable=false)
     public TransactionType getTransactionType() {
         return this.transactionType;
     }
     
     public void setTransactionType(TransactionType transactionType) {
         this.transactionType = transactionType;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="RANGE_ID")
+    public Range getRange() {
+        return this.range;
+    }
+    
+    public void setRange(Range range) {
+        this.range = range;
     }
 
     
@@ -119,33 +126,13 @@ public class Commission  implements java.io.Serializable {
     }
 
     
-    @Column(name="CRITERIA", precision=22, scale=0)
-    public BigDecimal getCriteria() {
+    @Column(name="CRITERIA", precision=8, scale=0)
+    public Integer getCriteria() {
         return this.criteria;
     }
     
-    public void setCriteria(BigDecimal criteria) {
+    public void setCriteria(Integer criteria) {
         this.criteria = criteria;
-    }
-
-    
-    @Column(name="RANGE_LOWER_LIMIT", precision=10)
-    public BigDecimal getRangeLowerLimit() {
-        return this.rangeLowerLimit;
-    }
-    
-    public void setRangeLowerLimit(BigDecimal rangeLowerLimit) {
-        this.rangeLowerLimit = rangeLowerLimit;
-    }
-
-    
-    @Column(name="RANGE_UPPER_LIMIT", precision=10)
-    public BigDecimal getRangeUpperLimit() {
-        return this.rangeUpperLimit;
-    }
-    
-    public void setRangeUpperLimit(BigDecimal rangeUpperLimit) {
-        this.rangeUpperLimit = rangeUpperLimit;
     }
 
     
@@ -209,16 +196,6 @@ public class Commission  implements java.io.Serializable {
     }
 
     
-    @Column(name="BANK_ACCOUNT", nullable=false, length=20)
-    public String getBankAccount() {
-        return this.bankAccount;
-    }
-    
-    public void setBankAccount(String bankAccount) {
-        this.bankAccount = bankAccount;
-    }
-
-    
     @Column(name="AGENT_PORTION", precision=8, scale=0)
     public Double getAgentPortion() {
         return this.agentPortion;
@@ -229,33 +206,42 @@ public class Commission  implements java.io.Serializable {
     }
 
     
-    @Column(name="BANK_PORTION", nullable=false, precision=8, scale=0)
-    public double getBankPortion() {
+    @Column(name="BANK_PORTION", precision=8, scale=0)
+    public Double getBankPortion() {
         return this.bankPortion;
     }
     
-    public void setBankPortion(double bankPortion) {
+    public void setBankPortion(Double bankPortion) {
         this.bankPortion = bankPortion;
     }
 
-    
-    @Column(name="OTHER_PORTION", precision=8, scale=0)
-    public Double getOtherPortion() {
-        return this.otherPortion;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="START_DATE")
+    public Date getStartDate() {
+        return this.startDate;
     }
     
-    public void setOtherPortion(Double otherPortion) {
-        this.otherPortion = otherPortion;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    
-    @Column(name="OTHER_ACCOUNT", length=20)
-    public String getOtherAccount() {
-        return this.otherAccount;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="END_DATE")
+    public Date getEndDate() {
+        return this.endDate;
     }
     
-    public void setOtherAccount(String otherAccount) {
-        this.otherAccount = otherAccount;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="commission")
+    public Set<CommissionProfile> getCommissionProfiles() {
+        return this.commissionProfiles;
+    }
+    
+    public void setCommissionProfiles(Set<CommissionProfile> commissionProfiles) {
+        this.commissionProfiles = commissionProfiles;
     }
 
 

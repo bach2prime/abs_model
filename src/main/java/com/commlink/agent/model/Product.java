@@ -43,6 +43,7 @@ public class Product  implements java.io.Serializable {
      private Short status;
      private String maxLimit;
      private Set<TempCustomerProduct> tempCustomerProducts = new HashSet<TempCustomerProduct>(0);
+     private Set<Commission> commissions = new HashSet<Commission>(0);
      private Set<Account> accounts = new HashSet<Account>(0);
      private Set<CustomerProduct> customerProducts = new HashSet<CustomerProduct>(0);
 
@@ -55,7 +56,7 @@ public class Product  implements java.io.Serializable {
         this.name = name;
         this.code = code;
     }
-    public Product(int id, String name, String minLimit, Boolean isRecurring, Date launchAt, Integer type, Boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, String code, Short capPeriodDr, Short capPeriodCr, Short status, String maxLimit, Set<TempCustomerProduct> tempCustomerProducts, Set<Account> accounts, Set<CustomerProduct> customerProducts) {
+    public Product(int id, String name, String minLimit, Boolean isRecurring, Date launchAt, Integer type, Boolean isDeleted, String createdBy, Date creationDate, String modifiedBy, Date modificationDate, String code, Short capPeriodDr, Short capPeriodCr, Short status, String maxLimit, Set<TempCustomerProduct> tempCustomerProducts, Set<Commission> commissions, Set<Account> accounts, Set<CustomerProduct> customerProducts) {
        this.id = id;
        this.name = name;
        this.minLimit = minLimit;
@@ -73,11 +74,12 @@ public class Product  implements java.io.Serializable {
        this.status = status;
        this.maxLimit = maxLimit;
        this.tempCustomerProducts = tempCustomerProducts;
+       this.commissions = commissions;
        this.accounts = accounts;
        this.customerProducts = customerProducts;
     }
    
-     @Id 
+    @Id 
 
     
     @Column(name="ID", unique=true, nullable=false, precision=8, scale=0)
@@ -246,6 +248,15 @@ public class Product  implements java.io.Serializable {
     
     public void setTempCustomerProducts(Set<TempCustomerProduct> tempCustomerProducts) {
         this.tempCustomerProducts = tempCustomerProducts;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="product")
+    public Set<Commission> getCommissions() {
+        return this.commissions;
+    }
+    
+    public void setCommissions(Set<Commission> commissions) {
+        this.commissions = commissions;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="product")

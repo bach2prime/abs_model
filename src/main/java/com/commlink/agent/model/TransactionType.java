@@ -63,7 +63,7 @@ public class TransactionType  implements java.io.Serializable {
        this.transactions = transactions;
     }
    
-     @Id 
+    @Id 
 
     
     @Column(name="ID", unique=true, nullable=false, precision=8, scale=0)
